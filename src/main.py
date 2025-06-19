@@ -24,8 +24,29 @@ def evaluate_tree(mst_edges, nodes):
         "Degree Per Node": dict(degree)
     }
 
+def format_degree_display(degree_dict, per_column=5):
+    items = list(degree_dict.items())
+    col1 = items[:per_column]
+    col2 = items[per_column:]
+    
+    output_lines = []
+    for i in range(per_column):
+        line = ""
+        if i < len(col1):
+            k1, v1 = col1[i]
+            line += f"{k1}: {v1:<3}"
+        else:
+            line += " " * 7
+        line += "   "
+        if i < len(col2):
+            k2, v2 = col2[i]
+            line += f"{k2}: {v2:<3}"
+        output_lines.append(line)
+    
+    return "\n".join(output_lines)
+
 def main():
-    df = pd.read_csv("adj_list.csv")
+    df = pd.read_csv("../docs/adj_list.csv")
     edges = list(df.itertuples(index=False, name=None))
     nodes = sorted(set(df["From"]).union(df["To"]))
 
@@ -39,7 +60,8 @@ def main():
     print("Total Cost:", eval_kruskal["Total Cost"], "km")
     print("Max Degree:", eval_kruskal["Max Degree"])
     print("Degree Std Dev:", round(eval_kruskal["Degree Std Dev"], 2))
-    print("Degree per Node:", eval_kruskal["Degree Per Node"])
+    print("Degree per node:")
+    print(format_degree_display(eval_kruskal["Degree Per Node"]))
 
     mst_lam, _ = lam_mst(edges.copy(), nodes, alpha=100)
     eval_lam = evaluate_tree(mst_lam, nodes)
@@ -51,7 +73,8 @@ def main():
     print("Total Cost:", eval_lam["Total Cost"], "km")
     print("Max Degree:", eval_lam["Max Degree"])
     print("Degree Std Dev:", round(eval_lam["Degree Std Dev"], 2))
-    print("Degree per Node:", eval_lam["Degree Per Node"])
+    print("Degree per node:")
+    print(format_degree_display(eval_lam["Degree Per Node"]))
 
 if __name__ == "__main__":
     main()
