@@ -2,7 +2,7 @@ import pandas as pd
 import numpy as np
 from math import radians, sin, cos, sqrt, atan2
 
-# 3-letter codes untuk kota
+
 city_codes = {
     "Jakarta": "JKT",
     "Bandung": "BDG",
@@ -16,7 +16,7 @@ city_codes = {
     "Jambi": "JBI"
 }
 
-# Latitude dan Longitude kota
+
 cities = {
     "Jakarta": (-6.175110, 106.865036),
     "Bandung": (-6.917464, 107.619125),
@@ -30,7 +30,7 @@ cities = {
     "Jambi": (-1.610123, 103.613121)
 }
 
-# Fungsi haversine untuk menghitung jarak antar koordinat
+
 def haversine(coord1, coord2):
     R = 6371  # radius bumi dalam km
     lat1, lon1 = radians(coord1[0]), radians(coord1[1])
@@ -40,7 +40,7 @@ def haversine(coord1, coord2):
     c = 2 * atan2(sqrt(a), sqrt(1 - a))
     return R * c
 
-# Threshold koneksi antar kota (dalam km)
+
 threshold_km = 1000
 city_names = list(cities.keys())
 n = len(city_names)
