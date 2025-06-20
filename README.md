@@ -20,7 +20,7 @@ Implemented in **Python**, this simulation is tested on a synthetic graph of 10 
 │   ├── LAM_MST_Algorithm.py      # Load-Aware Modified MST
 │   ├── main.py                   # Main evaluation script
 │   └── 50cities_experimental/    # Experiment with 50 cities (Dataset + results) (optional)
-├── docs/                         # Report or images (if any)
+├── docs/                         # docs for this experiment
 ├── README.md                     # You're reading it
 ```
 
@@ -58,9 +58,8 @@ Expected output includes:
 - **Kruskal's MST** minimizes the total connection cost but may result in centralized, unbalanced load on certain nodes.
 - **LAM-MST** modifies the edge weight using:
 
-  \[
-  W'(u,v) = w(u,v) + \alpha \cdot (\deg(u) + \deg(v))
-  \]
+  `W'(u,v) = w(u,v) + α · (deg(u) + deg(v))`
+
 
   A higher α penalizes edges connected to high-degree nodes, thus encouraging load balancing.
 
